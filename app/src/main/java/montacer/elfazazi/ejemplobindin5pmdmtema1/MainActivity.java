@@ -74,5 +74,5 @@ queda por hacer:
 1. elemnto para mostrar la info del alumno en el principal(textview)
 2. el conjunto de datos a mostrar (listaAlumnos)
 3. contenedor para poner cada elemento alumno (scroll)
-4.la logica para mostrar los elementos en el scroll del principal
+4.la logica para mostrar los elementos en el scroll del principall
  */
