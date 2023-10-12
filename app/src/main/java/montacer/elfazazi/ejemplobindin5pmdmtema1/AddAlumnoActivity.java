@@ -22,7 +22,6 @@ public class AddAlumnoActivity extends AppCompatActivity {
 
         binding = ActivityAddAlumnoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show();
 
         binding.btnCancelarAddAlumno.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //lanzar la actividad Alumno
-                Toast.makeText(MainActivity.this, "gggg", Toast.LENGTH_SHORT).show();
                 launcherAlumno.launch(new Intent(MainActivity.this, AddAlumnoActivity.class));
 
 
