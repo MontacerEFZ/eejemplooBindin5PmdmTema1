@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         listaAlumnos = new ArrayList<>();
 
-        inicializarLauncher();
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        inicializarLauncher(); //es indiferente si lo ponemos antes o despues del metodo del boton pero nos aclaramos
+            //mejor si lo ponemos despues
+
     }
 
     private void inicializarLauncher() {
