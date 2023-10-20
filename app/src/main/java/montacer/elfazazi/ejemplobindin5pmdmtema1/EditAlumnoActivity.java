@@ -94,7 +94,7 @@ public class EditAlumnoActivity extends AppCompatActivity {
                 break;
         }
 
-        switch (alumno.getGrupo()){ //comillas simples porq devuelve string, ver clase alumno
+        switch (alumno.getGrupo()){ //comillas simples porq devuelve char, ver clase alumno
             case 'A': binding.rbGrupoAEditAlumno.setChecked(true);
                 break;
             case 'B': binding.rbGrupoBEditAlumno.setChecked(true);
