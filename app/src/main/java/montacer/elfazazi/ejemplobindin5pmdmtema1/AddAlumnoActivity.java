@@ -48,10 +48,11 @@ public class AddAlumnoActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     setResult(RESULT_OK, intent);
 
+                    //terminar
+                    finish();
                 }
 
-                //terminar
-                finish();
+
             }
         });
     }

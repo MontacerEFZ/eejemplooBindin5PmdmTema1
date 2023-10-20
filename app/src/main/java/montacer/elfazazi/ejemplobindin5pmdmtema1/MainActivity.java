@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private ActivityResultLauncher<Intent> launcherAlumno;
+    private ActivityResultLauncher<Intent> editAlumnoLauncher;
+
     private ArrayList<Alumno> listaAlumnos;
 
     @Override
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         inicializarLauncher(); //es indiferente si lo ponemos antes o despues del metodo del boton pero nos aclaramos
             //mejor si lo ponemos despues
-
     }
 
     private void inicializarLauncher() {
@@ -73,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        editAlumnoLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                //que ocurrira cuando vuelva de la actividad
+            }
+        });
     }
 
     private void mostrarAlumnos() {
@@ -92,6 +100,21 @@ public class MainActivity extends AppCompatActivity {
             txtApellidos.setText(alumno.getApellidos());
             txtCiclo.setText(alumno.getCiclo());
             txtGrupo.setText(String.valueOf(alumno.getGrupo()));
+
+            alumnoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //enviar alumno
+                        Intent intent = new Intent(MainActivity.this, EditAlumnoActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("ALUMNO", alumno);
+                        intent.putExtras(bundle);
+                    //recibir alumno modificado o la orden de eliminar
+                        editAlumnoLauncher.launch(intent); //para enviar informacion es el intent y el bundle con un new,
+                                //para recibirlo en la nueva actividad es con un intent y bundle pero con get en lugar de new; y
+                                //para tratar la informacion que devuelva la actvidad es con el launcher.
+                }
+            });
 
             binding.contentMain.contenedorMain.addView(alumnoView);
         }
