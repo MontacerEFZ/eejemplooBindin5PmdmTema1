@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import montacer.elfazazi.ejemplobindin5pmdmtema1.databinding.ActivityEditAlumnoBinding;
@@ -24,6 +26,56 @@ public class EditAlumnoActivity extends AppCompatActivity {
         Alumno alumno = (Alumno) bundle.getSerializable("ALUMNO");
 
         rellenarFormulario(alumno);
+
+        binding.btnEditarEditAlumno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //crear alumno
+                Alumno alu = crearAlumno();
+                //enviar info al principal
+                if (alu != null){
+                    Intent intentVolver = new Intent();
+                    Bundle bundleVovler = new Bundle();
+                    bundleVovler.putSerializable("ALUMNO",alu);
+                    intentVolver.putExtras(bundleVovler);
+                    setResult(RESULT_OK, intentVolver);
+                    finish();
+                }else {
+                    Toast.makeText(EditAlumnoActivity.this, "faltan datos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        binding.btnEliminarEditAlumno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+    }
+
+    private Alumno crearAlumno() {
+        if (binding.txtNombreEditAlumno.getText().toString().isEmpty()){
+            return null;
+        }
+        if (binding.txtApellidosEditAlumno.getText().toString().isEmpty()){
+            return null;
+        }
+        if (binding.spCiclosEditAlumno.getSelectedItemPosition() == 0){
+            return null;
+        }
+        if (!binding.rbGrupoAEditAlumno.isChecked() && !binding.rbGrupoBEditAlumno.isChecked() && !binding.rbGrupoCEditAlumno.isChecked()){
+            return null;
+        }
+
+        RadioButton rb = findViewById(binding.rgGrupoEditAlumno.getCheckedRadioButtonId());
+
+        char letra = rb.getText().charAt(rb.getText().length()-1);
+        Alumno alumno = new Alumno(binding.txtNombreEditAlumno.getText().toString(), binding.txtApellidosEditAlumno.getText().toString(),
+                binding.spCiclosEditAlumno.getSelectedItem().toString(), letra);
+
+        return alumno;
     }
 
     private void rellenarFormulario(Alumno alumno) {
@@ -31,24 +83,24 @@ public class EditAlumnoActivity extends AppCompatActivity {
         binding.txtApellidosEditAlumno.setText(alumno.getApellidos());
         switch (alumno.getCiclo()){ //doble comillas porq devuelve string, ver clase alumno
             case "SMR": binding.spCiclosEditAlumno.setSelection(1);
-            break;
+                break;
             case "DAM": binding.spCiclosEditAlumno.setSelection(2);
-            break;
+                break;
             case "DAW": binding.spCiclosEditAlumno.setSelection(3);
-            break;
+                break;
             case "3D": binding.spCiclosEditAlumno.setSelection(4);
-            break;
+                break;
             case "Marketing": binding.spCiclosEditAlumno.setSelection(5);
-            break;
+                break;
         }
 
         switch (alumno.getGrupo()){ //comillas simples porq devuelve string, ver clase alumno
             case 'A': binding.rbGrupoAEditAlumno.setChecked(true);
-            break;
+                break;
             case 'B': binding.rbGrupoBEditAlumno.setChecked(true);
-            break;
+                break;
             case 'C': binding.rbGrupoCEditAlumno.setChecked(true);
-            break;
+                break;
         }
     }
 }
