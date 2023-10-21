@@ -21,7 +21,7 @@ public class EditAlumnoActivity extends AppCompatActivity {
         binding = ActivityEditAlumnoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent intent = getIntent(); //get en ugar de new para coger la informqcion enviada desde el main en el launcher
+        Intent intent = getIntent(); //get en lugar de new para coger la informqcion enviada desde el main en el launcher
         Bundle bundle = intent.getExtras(); //get en lugar de new para sacar la info enviada desde el main
         Alumno alumno = (Alumno) bundle.getSerializable("ALUMNO");
 
